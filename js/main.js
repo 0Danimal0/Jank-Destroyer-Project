@@ -424,20 +424,23 @@ function resizePizzas(size) {
   changeSliderLabel(size);
 
    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSizes(size).
-  function determineDx (elem, size) {
-    var oldWidth = elem.offsetWidth;
-    var windowWidth = document.getElementById("#randomPizzas").offsetWidth;
-    var oldSize = oldWidth / windowWidth;
-    var dx = (newSize - oldSize) * windowWidth;
+//  function determineDx (elem, size) {
+//    var oldWidth = elem.offsetWidth;
+//    var windowWidth = document.getElementById("#randomPizzas").offsetWidth;
+//    var oldSize = oldWidth / windowWidth;
+//    var dx = (newSize - oldSize) * windowWidth;
 
-    return dx;
-  }
+//    return dx;
+//  }
 
   // Iterates through pizza elements on the page and changes their widths
 
   var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
   var pizzaSizeLength = randomPizzas.length;
 
+
+// This captures all the state of the slider through cases, the changes the widths of the
+// pizza containers to reflect user input.
 function changePizzaSizes(size) {
       switch(size) {
         case "1":
@@ -457,7 +460,6 @@ function changePizzaSizes(size) {
       randomPizzas[i].style.width = barWidthChange + '%';
     }
   }
-  
     changePizzaSizes(size);
 
 
@@ -503,6 +505,8 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
+// This is a callable function for to animate the frames through requestAnimationFrame,
+// which is a performance necessity.
 function animatePizzas() {
     window.requestAnimationFrame(updatePositions);
 };
