@@ -398,8 +398,10 @@ var pizzaElementGenerator = function(i) {
   return pizzaContainer;
 };
 
+
+
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
-var resizePizzas = function(size) {
+function resizePizzas(size) {
   window.performance.mark("mark_start_resize");   // User Timing API function
 
   // Changes the value for the size of the pizza above the slider
@@ -424,7 +426,7 @@ var resizePizzas = function(size) {
    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSizes(size).
   function determineDx (elem, size) {
     var oldWidth = elem.offsetWidth;
-    var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
+    var windowWidth = document.getElementById("#randomPizzas").offsetWidth;
     var oldSize = oldWidth / windowWidth;
     var dx = (newSize - oldSize) * windowWidth;
 
@@ -433,35 +435,32 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
 
-  var pizzaSizeChange = document.getElementsByClassName("randomPizzaContainer");
-  var pizzaSizeLength = pizzaSizeChange.length;
+  var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
+  var pizzaSizeLength = randomPizzas.length;
 
-  function changePizzaSizes(size) {
-
-    var barWidthChange;
+function changePizzaSizes(size) {
       switch(size) {
         case "1":
-          changedWidth = 25;
+          barWidthChange = 25;
           break;
         case "2":
-          changedWidth = 33.3;
+          barWidthChange = 33.3;
           break;
         case "3":
-          changedWidth = 5;
+          barWidthChange = 50;
           break;
         default:
           console.log("bug in sizeSwitcher");
       }
 
-
-
-    var newwidth =[];
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      pizzaSizeChange[i].style.width = barWidthChange + '%';
+    for (var i = 0; i < pizzaSizeLength; i++) {
+      randomPizzas[i].style.width = barWidthChange + '%';
     }
   }
-
+  
     changePizzaSizes(size);
+
+
 
   // User Timing API is awesome
   window.performance.mark("mark_end_resize");
@@ -471,6 +470,8 @@ var resizePizzas = function(size) {
 };
 
 window.performance.mark("mark_start_generating"); // collect timing data
+
+
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
 for (var i = 2; i < 100; i++) {
